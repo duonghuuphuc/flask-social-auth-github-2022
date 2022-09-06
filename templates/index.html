@@ -1,0 +1,18 @@
+<!-- Filename: templates/index.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <div style="text-align:center;">
+    {% if current_user.is_authenticated %}
+      <h1>Hello {{current_user.username}}!</h1>
+      <br/><br/>
+      <a href="{{url_for('logout')}}" class="btn btn-danger">Logout</a>
+
+    {% else %}
+      <a href="{{url_for('login')}}" class="btn btn-primary">
+        <i class="fa-brands fa-github"></i>
+        <span>Login with GitHub</span>
+      </a>
+    {% endif %}
+  </div>
+{% endblock content %}
