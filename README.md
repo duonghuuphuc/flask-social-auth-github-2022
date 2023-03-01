@@ -13,14 +13,14 @@ You need to obtain GitHub OAuth information by visiting GitHub website and enter
  - Application description: *(leave it blank or enter your desired description)*
  - Authorization callback URL: `http://127.0.0.1:5000/login/github/authorized`
 
-After obtaining the Client-ID and Client-Secret from GitHub, you can now insert them into the `env.sh`.
+After obtaining the Client-ID and Client-Secret from GitHub, you can now insert them into the `env.sh`. If you are using Microsoft Windows OS, please read section **For Windows OS**.
 
 
 ## Implementation
 
 First, we define two models in the `models.py`, i.e., `User`, `OAuth`. The `User` model will store the GitHub username of an authenticated user. The `OAuth` model is inherited from `OAuthConsumerMixin` of Flask-Dance to add the necessary fields to store OAuth information. You can find out more about the use of `OAuthConsumerMixin` at [here](https://flask-dance.readthedocs.io/en/v1.2.0/backends.html).
 
-Second, we define the `github_blueprint` in `oauth.py` along with a function () which will automatically perform one of these actions:
+Second, we define the `github_blueprint` in `oauth.py` along with the `github_logged_in()` function which will automatically perform one of these actions:
 
  - If a given username does exist in the database, the function will log the user in.
  - Otherwise, the function will create a new user account in the database, and then log the user in.
@@ -35,7 +35,7 @@ And then, we implement the procedure to authenticate a user in the `login()` fun
  3. You should install all Python packages as presented in `requirements.txt` by executing this command in the current environment: `$ pip install -r requirements.txt`.
  4. Create the database and its tables by executing the following commands:
 ```
-$ export FLASK_APP=main.py
+$ export FLASK_APP=app.py
 $ flask db init
 $ flask shell
 >>> from app import db
@@ -50,3 +50,11 @@ The following two screenshots are the results of the demo program if it is prope
 ![Login web page](https://www.dhpit.com/img/flask-social-auth-github-20220609-a.png)
 
 ![Result when a user is successfully authenticated](https://www.dhpit.com/img/flask-social-auth-github-20220609-b.png)
+
+
+## For Windows OS
+
+Although the demo program can be run on both MacOS/Linux-based OS and Windows OS, there are some notices when running it on Microsoft Windows OS, as follows:
+
+- Using `set` instead of `export`
+- You should install [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) (WSL) and the `.sh` files can be executed by running `bash env.sh` in CMD window
