@@ -58,3 +58,4 @@ Although the demo program can be run on both MacOS/Linux-based OS and Windows OS
 
 - Using `set` instead of `export`
 - You should install [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) (WSL) and the `.sh` files can be executed by running `bash env.sh` in CMD window
+- Do not include any quotations when executing `set` commands in CMD (if the value doesn't have whitespaces), i.e., `set GITHUB_CLIENT_ID=12345abcde`
